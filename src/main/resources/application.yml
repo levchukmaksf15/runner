@@ -3,3 +3,9 @@ spring:
     name: command
 server:
   port: 8081
+telegram:
+  bot:
+    username: karambol_pool_bot
+    token: 8033934101:AAH8a7JHsVAWuYnfhvdXjFyUcFt1QnkDOPs
+admin:
+  chat-id: 376457703
