@@ -6,5 +6,5 @@ services:
     image: telegram-bot
     container_name: telegram-bot
     ports:
-      - "6311:8081"
+      - "8081:8080"
 #      - "80:8080"
