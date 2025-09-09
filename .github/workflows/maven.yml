@@ -1,0 +1,51 @@
+# This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
+
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: Java CI with Maven
+
+on:
+  push:
+    branches: [ "master" ]
+
+jobs:
+#  test: # Название джобы
+#    runs-on: ubuntu-latest   # Где должна выполняться джоба.
+## Здесь укажем GitHub-hosted runner - среду выполнения, которую предоставляет сам GitHub.
+#    steps: # Перечень шагов, которые необходимо выполнить в рамках джобы.
+#      - name: cd into repo # Название шага
+#        uses: actions/checkout@v4 # Ключевое слово uses используется для запуска заранее
+## созданного набора команд. В данном случае используем дефолтную команду
+## для обновления проекта до последнего коммита.
+#      - name: set up Java and Maven # Настраиваем Java и Maven.
+#        uses: actions/setup-java@v4
+#        with:
+#          java-version: '17'
+#          distribution: 'corretto'
+#          cache: maven
+#      - name: run tests
+#        run: mvn test # Запускаем тесты.
+
+  prepare-environment:
+#    runs-on: ec2
+    runs-on: telegram-bot # Запускаем на раннере, который настроили до этого.
+#    needs: test # Запускаем только если джоба test прошла успешно
+    steps:
+      - name: Stop and remove containers, networks
+        run: docker-compose down
+      - name: Remove unused data
+        run: docker system prune -a -f
+
+  deploy:
+#    runs-on: ec2
+    runs-on: telegram-bot # Запускаем на раннере, который настроили до этого.
+    needs: prepare-environment # Запускаем только если джоба prepare-environment прошла успешно
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v4
+      - name: docker-compose
+        run: docker-compose up -d

@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  back:
+    build: .
+    image: telegram-bot
+    container_name: telegram-bot
+    ports:
+      - "6311:8081"
+#      - "80:8080"
