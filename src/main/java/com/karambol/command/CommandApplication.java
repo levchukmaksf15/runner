@@ -15,9 +15,7 @@ public class CommandApplication {
 		try {
 			TelegramBotsApi botsApi = new TelegramBotsApi(DefaultBotSession.class);
 			botsApi.registerBot(new SupportBot());
-		} catch (TelegramApiException e) {
-			e.printStackTrace();
+		} catch (TelegramApiException ignored) {
 		}
 	}
-
 }

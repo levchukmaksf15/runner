@@ -70,7 +70,7 @@ public class SupportBot extends TelegramLongPollingBot {
                 } catch (Exception ignored) {
                 }
 
-                send(adminReplyContext.get(chatId), "✉️ Відповідь на ваше запитання: \n\n" + text);
+                send(adminReplyContext.get(chatId), text);
                 send(adminChatId, "✅ Відповідь відправлена користувачу");
 
                 adminReplyContext.remove(chatId);
