@@ -57,8 +57,10 @@ public class SupportBot extends TelegramLongPollingBot {
             String text = update.getMessage().getText();
 
             if (chatId != adminChatId) {
-                send(chatId, "Дякуємо, ваше повідомлення отримано. Вам нададуть відповідь незабаром, очікуйте, будь ласка.");
-                sendToAdmin(chatId, username, text);
+                if (!text.equals("/start")) {
+                    send(chatId, "Дякуємо, ваше повідомлення отримано. Вам нададуть відповідь незабаром, очікуйте, будь ласка.");
+                    sendToAdmin(chatId, username, text);
+                }
             } else if (adminReplyContext.containsKey(chatId)) {
                 EditMessageReplyMarkup editMarkup = new EditMessageReplyMarkup();
                 editMarkup.setChatId(chatId.toString());
